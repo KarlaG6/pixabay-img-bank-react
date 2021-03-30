@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import Error from './Error';
 
-const Form = () => {
+const Form = ({saveBusqueda}) => {
 
     // valor reactivo del input
     const [termino, saveTermino] = useState('');
@@ -16,9 +16,9 @@ const Form = () => {
             return;
         }
         setError(false);
-        
-        // enviar el termino de busqueda hacia el componente principal
 
+        // enviar el termino de busqueda hacia el componente principal
+        saveBusqueda(termino);
     }
 
     return ( 
