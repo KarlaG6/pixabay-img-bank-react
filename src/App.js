@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import Formulario from './components/Form';
+import ImagesList from './components/ImagesList';
 
 function App() {
 
   // state de la app
   const [busqueda, saveBusqueda] = useState('');
+  const [images, setImages] = useState([])
 
   useEffect(() => {
     const consultarApi = async () => {
@@ -17,7 +19,7 @@ function App() {
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
 
-      console.log(resultado.hits);
+      setImages(resultado.hits);
     }
     consultarApi()
   }, [busqueda])
@@ -28,6 +30,9 @@ function App() {
         <p className="lead text-center">Buscador de Imágenes</p>
 
         <Formulario saveBusqueda={saveBusqueda} />
+      </div>
+      <div className="row justify-content-center">
+        <ImagesList images={images} />
       </div>
     </div>
   );
